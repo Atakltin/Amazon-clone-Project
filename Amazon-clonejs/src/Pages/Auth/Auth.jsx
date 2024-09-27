@@ -2,10 +2,7 @@ import React, { useState, useContext } from "react";
 import classes from "./SignUp.module.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../../Utility/firebase";
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+import {signInWithEmailAndPassword,createUserWithEmailAndPassword,} from "firebase/auth";
 import { ClipLoader } from "react-spinners";
 import { DataContext } from "../../Components/DataProvider/DataProvider";
 import { Type } from "../../Utility/action.type";
@@ -42,6 +39,7 @@ function Auth() {
           navigate(navStateData?.state?.redirect || "/");
         })
         .catch((err) => {
+          console.log(err);
           setError(err.message);
           setLoading({ ...loading, signIn: false });
         });
@@ -143,9 +141,7 @@ function Auth() {
             "Create your Amazon Account"
           )}
         </button>
-        {error && (
-          <small style={{ paddingTop: "5px", color: "red" }}>{error}</small>
-        )}
+        {error && (<small style={{ paddingTop: "5px", color: "red" }}>{error}</small>)}
       </div>
     </section>
   );
